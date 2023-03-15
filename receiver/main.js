@@ -1,6 +1,16 @@
 
 window.onload = function() {
-  infoMsg('Application version 2');
+  infoMsg('Application version 4');
+  infoMsg('UserAgent: ',window.navigator.userAgent );
+
+  const errorElement = document.querySelector('#errorMsg');
+  let video=document.querySelector('#video');
+  let button=document.querySelector('#button');
+
+  button.addEventListener('click', function(event){
+    infoMsg('start play with audio');
+    video.play();
+  });
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
 
@@ -41,6 +51,10 @@ window.onload = function() {
               break;
           case 'pause':
               video.pause();
+              break;
+          case 'clear':
+            errorElement.innerHTML='';
+            break;
       }
   });
 
@@ -50,21 +64,7 @@ window.onload = function() {
 
 
   function infoMsg(msg) {
-    const errorElement = document.querySelector('#errorMsg');
     errorElement.innerHTML += `<p>${msg}</p>`;
   }
 
-  let video=document.querySelector('#video');
-  let button=document.querySelector('#button');
-
-  button.addEventListener('click', function(event){
-    infoMsg('start play with audio');
-    video.play();
-  });
-
-  try{
-    video.play();
-  }catch(error){
-    infoMsg(error);
-  }
 };

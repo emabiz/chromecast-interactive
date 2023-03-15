@@ -31,6 +31,13 @@ pause.addEventListener('click', function(event){
   });
 });
 
+let clear=document.querySelector('#clear');
+pause.addEventListener('click', function(event){
+  sendMessage({
+    op:'clear'
+  });
+});
+
 function sendMessage(message) {
   if(!session){
     return;
