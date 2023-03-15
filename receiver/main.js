@@ -1,5 +1,6 @@
 
 window.onload = function() {
+  infoMsg('Application version 1');
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
 
