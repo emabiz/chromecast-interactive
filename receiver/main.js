@@ -9,7 +9,7 @@ window.onload = function() {
     });
   });
 
-  infoMsg('Receiver version 14');
+  infoMsg('Receiver version 15');
   infoMsg('UserAgent: '+window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
