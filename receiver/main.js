@@ -1,7 +1,5 @@
 
 window.onload = function() {
-  window.location.href = "https://www.repubblica.it/index.html";
-  return;
   let  errorElement = document.querySelector('#errorMsg');
   let video=document.querySelector('#video');
   let button=document.querySelector('#button');
