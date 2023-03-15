@@ -2,14 +2,8 @@
 window.onload = function() {
   let  errorElement = document.querySelector('#errorMsg');
   let iframe= document.querySelector('#content');
-  // let video=document.querySelector('#video');
-  // let button=document.querySelector('#button');
-  // button.addEventListener('click', function(event){
-  //   infoMsg('start play with audio');
-  //   video.play();
-  // });
 
-  infoMsg('Receiver version 12');
+  infoMsg('Receiver version 13');
   infoMsg('UserAgent: '+window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
@@ -50,13 +44,11 @@ window.onload = function() {
               send_iframe_message({
                 op:event.data.op
               });
-              //video.play();
               break;
           case 'pause':
             send_iframe_message({
               op:event.data.op
             });
-              //video.pause();
               break;
           case 'clear':
             errorElement.innerHTML='';
