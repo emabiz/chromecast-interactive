@@ -7,9 +7,52 @@ var namespace = 'urn:x-cast:com.emabiz.chromecast-interactive';
 var session = null;
 
 let start=document.querySelector('#start');
+start.addEventListener('click', function(event){
+  console.log('connect()');
+  chrome.cast.requestSession(function(e) {
+      console.log('requestSession callback');
+      session = e;
+      sessionListener(e);
+    }, onError);
+});
+
+
 let play=document.querySelector('#play');
+play.addEventListener('click', function(event){
+  sendMessage({
+    op:'play'
+  });
+});
+
 let pause=document.querySelector('#pause');
+play.addEventListener('click', function(event){
+  sendMessage({
+    op:'pause'
+  });
+});
+
+function sendMessage(message) {
+  if(!session){
+    return;
+  }
+  session.sendMessage(namespace, message, onSuccess.bind(this, message), onError);
+}
+
 let kill=document.querySelector('#kill');
+kill.addEventListener('click', function(event){
+  if(!session){
+    return;
+  }
+  session.stop(onStopAppSuccess, onError);
+});
+
+
+function onStopAppSuccess() {
+  console.log('onStopAppSuccess');
+
+  kill.prop('disabled', true);
+}
+
 
 if (!chrome.cast || !chrome.cast.isAvailable) {
   setTimeout(initializeCastApi, 1000);
@@ -36,15 +79,10 @@ function onSuccess(message) {
   console.log('onSuccess: ' + JSON.stringify(message));
 
   if (message.type == 'load') {
-    kill.prop('disabled', false);
+      kill.prop('disabled', false);
   }
 }
 
-function onStopAppSuccess() {
-  console.log('onStopAppSuccess');
-
-  kill.prop('disabled', true);
-}
 
 function sessionListener(e) {
   console.log('New session ID: ' + e.sessionId);
@@ -62,33 +100,3 @@ function sessionUpdateListener(isAlive) {
 function receiverListener(e) {
   // Due to API changes just ignore this.
 }
-
-function sendMessage(message) {
-  if (session != null) {
-    session.sendMessage(namespace, message, onSuccess.bind(this, message), onError);
-  }
-  else {
-    console.log('requestSession');
-    chrome.cast.requestSession(function(e) {
-      console.log('requestSession callback');
-      session = e;
-      sessionListener(e);
-      session.sendMessage(namespace, message, onSuccess.bind(this, message), onError);
-    }, onError);
-  }
-}
-
-function stopApp() {
-  session.stop(onStopAppSuccess, onError);
-}
-
-function connect() {
-  console.log('connect()');
-  sendMessage({
-    type: 'load',
-    url: $('#url').val(),
-    refresh: $('#refresh').val(),
-  });
-}
-
-kill.on('click', stopApp);

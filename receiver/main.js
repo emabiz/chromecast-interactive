@@ -23,18 +23,14 @@ window.onload = function() {
   window.messageBus =window.castReceiverManager.getCastMessageBus('urn:x-cast:com.emabiz.chromecast-interactive', cast.receiver.CastMessageBus.MessageType.JSON);
 
   window.messageBus.onMessage = function(event) {
-    console.log('Message [' + event.senderId + ']: ' + event.data);
-
-    // if (event.data['type'] == 'load') {
-    //   $('#dashboard').attr('src', event.data['url']);
-    //   if (event.data['refresh'] > 0) {
-    //     $('#dashboard').attr('data-refresh', event.data['refresh'] * 1000);
-    //     setTimeout(reloadDashboard, $('#dashboard').attr('data-refresh'));
-    //   }
-    //   else {
-    //     $('#dashboard').attr('data-refresh', 0);
-    //   }
-    // }
+      console.log('Message [' + event.senderId + ']: ' + event.data);
+      switch(event.data.op){
+          case 'play':
+              video.play();
+              break;
+          case 'pause':
+              video.pause();
+      }
   }
 
   // Initialize the CastReceiverManager with an application status message.
