@@ -47,7 +47,11 @@ window.onload = function() {
     errorElement.innerHTML += `<p>${msg}</p>`;
   }
 
-  document.querySelector('#button').addEventListener('click', function(event){
+  let video=document.querySelector('#video');
+  video.play();
+  let button=document.querySelector('#button');
+
+  button.addEventListener('click', function(event){
     infoMsg('pippo');
   });
 };
