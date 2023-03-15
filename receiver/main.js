@@ -1,16 +1,15 @@
 
 window.onload = function() {
-  infoMsg('Application version 4');
-  infoMsg('UserAgent: ',window.navigator.userAgent );
-
   const errorElement = document.querySelector('#errorMsg');
   let video=document.querySelector('#video');
   let button=document.querySelector('#button');
-
   button.addEventListener('click', function(event){
     infoMsg('start play with audio');
     video.play();
   });
+
+  infoMsg('Application version 5');
+  infoMsg('UserAgent: ',window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
 
