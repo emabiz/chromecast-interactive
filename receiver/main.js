@@ -12,28 +12,23 @@ window.onload = function() {
     }
   });
 
-
-  // cast.receiver.logger.setLevelValue(0);
-  window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
   castDebugLogger.log('ema','Starting Receiver Manager');
 
-  castReceiverManager.onReady = function(event) {
+  context.addEventListener('READY',function(event) {
     castDebugLogger.log('ema','Received Ready event: ' + JSON.stringify(event.data));
-    window.castReceiverManager.setApplicationState('chromecast is ready...');
-  };
+    context.setApplicationState('chromecast is ready...');
+  });
 
-  castReceiverManager.onSenderConnected = function(event) {
+  context.addEventListener('SENDER_CONNECTED',function(event) {
     castDebugLogger.log('ema','Received Sender Connected event: ' + event.senderId);
-  };
+  });
 
-  castReceiverManager.onSenderDisconnected = function(event) {
+  context.addEventListener('SENDER_DISCONNECTED',function(event) {
     castDebugLogger.log('ema','Received Sender Disconnected event: ' + event.senderId);
-  };
+  });
 
-  window.messageBus =window.castReceiverManager.getCastMessageBus('urn:x-cast:com.emabiz.chromecast-interactive', cast.receiver.CastMessageBus.MessageType.JSON);
-
-  window.messageBus.onMessage = function(event) {
-    castDebugLogger.log('ema','Message [' + event.senderId + ']: ' + event.data);
+  context.addCustomMessageListener('urn:x-cast:com.emabiz.chromecast-interactive', function(event) {
+    castDebugLogger.log('ema',event);
       switch(event.data.op){
           case 'play':
               video.play();
@@ -41,10 +36,10 @@ window.onload = function() {
           case 'pause':
               video.pause();
       }
-  }
+  });
 
-  // Initialize the CastReceiverManager with an application status message.
-  window.castReceiverManager.start({statusText: 'Application is starting'});
+
+  context.start({statusText: 'Application is starting'});
   castDebugLogger.log('ema','Receiver Manager started');
 
 
