@@ -1,6 +1,6 @@
 
 window.onload = function() {
-  const errorElement = document.querySelector('#errorMsg');
+  let  errorElement = document.querySelector('#errorMsg');
   let video=document.querySelector('#video');
   let button=document.querySelector('#button');
   button.addEventListener('click', function(event){
@@ -8,7 +8,7 @@ window.onload = function() {
     video.play();
   });
 
-  infoMsg('Application version 5');
+  infoMsg('Application version 6');
   infoMsg('UserAgent: ',window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
