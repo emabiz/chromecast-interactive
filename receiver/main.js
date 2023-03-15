@@ -6,7 +6,7 @@ window.onload = function() {
   const context = cast.framework.CastReceiverContext.getInstance();
 
   context.addEventListener(cast.framework.system.EventType.READY, () => {
-    castDebugLogger.log('ema','Received Ready event: ' + JSON.stringify(event.data));
+    castDebugLogger.info('ema','Received Ready event: ' + JSON.stringify(event.data));
     context.setApplicationState('chromecast is ready...');
     if (!castDebugLogger.debugOverlayElement_) {
         // Enable debug logger and show a 'DEBUG MODE' overlay at top left corner.
@@ -14,18 +14,18 @@ window.onload = function() {
     }
   });
 
-  castDebugLogger.log('ema','Starting Receiver Manager');
+  castDebugLogger.info('ema','Starting Receiver Manager');
 
   context.addEventListener(cast.framework.system.EventType.SENDER_CONNECTED,function(event) {
-    castDebugLogger.log('ema','Received Sender Connected event: ' + event.senderId);
+    castDebugLogger.info('ema','Received Sender Connected event: ' + event.senderId);
   });
 
   context.addEventListener(cast.framework.system.EventType.SENDER_DISCONNECTED,function(event) {
-    castDebugLogger.log('ema','Received Sender Disconnected event: ' + event.senderId);
+    castDebugLogger.info('ema','Received Sender Disconnected event: ' + event.senderId);
   });
 
   context.addCustomMessageListener('urn:x-cast:com.emabiz.chromecast-interactive', function(event) {
-    castDebugLogger.log('ema',event);
+    castDebugLogger.info('ema',event);
       switch(event.data.op){
           case 'play':
               video.play();
@@ -37,7 +37,7 @@ window.onload = function() {
 
 
   context.start({statusText: 'Application is starting'});
-  castDebugLogger.log('ema','Receiver Manager started');
+  castDebugLogger.info('ema','Receiver Manager started');
 
 
   function infoMsg(msg) {
