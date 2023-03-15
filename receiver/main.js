@@ -6,6 +6,8 @@ window.onload = function() {
   const context = cast.framework.CastReceiverContext.getInstance();
 
   context.addEventListener(cast.framework.system.EventType.READY, () => {
+    castDebugLogger.log('ema','Received Ready event: ' + JSON.stringify(event.data));
+    context.setApplicationState('chromecast is ready...');
     if (!castDebugLogger.debugOverlayElement_) {
         // Enable debug logger and show a 'DEBUG MODE' overlay at top left corner.
         castDebugLogger.setEnabled(true);
@@ -14,16 +16,11 @@ window.onload = function() {
 
   castDebugLogger.log('ema','Starting Receiver Manager');
 
-  context.addEventListener('READY',function(event) {
-    castDebugLogger.log('ema','Received Ready event: ' + JSON.stringify(event.data));
-    context.setApplicationState('chromecast is ready...');
-  });
-
-  context.addEventListener('SENDER_CONNECTED',function(event) {
+  context.addEventListener(cast.framework.system.EventType.SENDER_CONNECTED,function(event) {
     castDebugLogger.log('ema','Received Sender Connected event: ' + event.senderId);
   });
 
-  context.addEventListener('SENDER_DISCONNECTED',function(event) {
+  context.addEventListener(cast.framework.system.EventType.SENDER_DISCONNECTED,function(event) {
     castDebugLogger.log('ema','Received Sender Disconnected event: ' + event.senderId);
   });
 
