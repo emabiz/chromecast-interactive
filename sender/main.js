@@ -6,7 +6,7 @@ var applicationID = '2AC895E5';
 var namespace = 'urn:x-cast:com.emabiz.chromecast-interactive';
 var session = null;
 
-let start=document.querySelector('#start');
+let start=document.querySelector('#cast');
 start.addEventListener('click', function(event){
   console.log('connect()');
   chrome.cast.requestSession(function(e) {
