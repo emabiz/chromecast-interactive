@@ -2,9 +2,14 @@
  * Main JavaScript for handling Chromecast interactions.
  */
 
-var applicationID = 'D3968249';
-var namespace = 'urn:x-cast:com.emabiz.chromecast-dashboard';
+var applicationID = '2AC895E5';
+var namespace = 'urn:x-cast:com.emabiz.chromecast-interactive';
 var session = null;
+
+let start=document.querySelector('#start');
+let play=document.querySelector('#play');
+let pause=document.querySelector('#pause');
+let kill=document.querySelector('#kill');
 
 if (!chrome.cast || !chrome.cast.isAvailable) {
   setTimeout(initializeCastApi, 1000);
@@ -14,9 +19,7 @@ function initializeCastApi() {
   console.log('initializeCastApi',applicationID);
   var sessionRequest = new chrome.cast.SessionRequest(applicationID);
   console.log('sessionRequest',sessionRequest);
-  var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
-    sessionListener,
-    receiverListener);
+  var apiConfig = new chrome.cast.ApiConfig(sessionRequest,sessionListener,receiverListener);
 
   chrome.cast.initialize(apiConfig, onInitSuccess, onError);
 };
@@ -32,17 +35,15 @@ function onError(message) {
 function onSuccess(message) {
   console.log('onSuccess: ' + JSON.stringify(message));
 
-  if (message['type'] == 'load') {
-    $('#kill').prop('disabled', false);
-    $('#post-note').show();
+  if (message.type == 'load') {
+    kill.prop('disabled', false);
   }
 }
 
 function onStopAppSuccess() {
   console.log('onStopAppSuccess');
 
-  $('#kill').prop('disabled', true);
-  $('#post-note').hide();
+  kill.prop('disabled', true);
 }
 
 function sessionListener(e) {
@@ -90,4 +91,4 @@ function connect() {
   });
 }
 
-$('#kill').on('click', stopApp);
+kill.on('click', stopApp);

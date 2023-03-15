@@ -20,7 +20,7 @@ window.onload = function() {
     console.log('Received Sender Disconnected event: ' + event.senderId);
   };
 
-  window.messageBus =window.castReceiverManager.getCastMessageBus('urn:x-cast:com.emabiz.chromecast', cast.receiver.CastMessageBus.MessageType.JSON);
+  window.messageBus =window.castReceiverManager.getCastMessageBus('urn:x-cast:com.emabiz.chromecast-interactive', cast.receiver.CastMessageBus.MessageType.JSON);
 
   window.messageBus.onMessage = function(event) {
     console.log('Message [' + event.senderId + ']: ' + event.data);
