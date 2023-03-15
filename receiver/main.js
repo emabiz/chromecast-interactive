@@ -2,6 +2,12 @@
 window.onload = function() {
   let  errorElement = document.querySelector('#errorMsg');
   let iframe= document.querySelector('#content');
+  let login=document.querySelector('#login');
+  login.addEventListener('click', function(event){
+    send_iframe_message({
+      op:'play'
+    });
+  });
 
   infoMsg('Receiver version 14');
   infoMsg('UserAgent: '+window.navigator.userAgent );
