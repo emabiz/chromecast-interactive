@@ -52,6 +52,7 @@ window.onload = function() {
   let button=document.querySelector('#button');
 
   button.addEventListener('click', function(event){
-    infoMsg('pippo');
+    infoMsg('start play with audio');
+    video.play();
   });
 };
