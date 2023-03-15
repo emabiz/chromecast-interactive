@@ -22,15 +22,18 @@ window.onload = function() {
   castDebugLogger.info('ema','Starting Receiver Manager');
 
   context.addEventListener(cast.framework.system.EventType.SENDER_CONNECTED,function(event) {
+    infoMsg('Sender Connected');
     castDebugLogger.info('ema','Received Sender Connected event: ' + event.senderId);
   });
 
   context.addEventListener(cast.framework.system.EventType.SENDER_DISCONNECTED,function(event) {
+    infoMsg('Sender Disconnected');
     castDebugLogger.info('ema','Received Sender Disconnected event: ' + event.senderId);
   });
 
   context.addCustomMessageListener('urn:x-cast:com.emabiz.chromecast-interactive', function(event) {
     castDebugLogger.info('ema',event);
+    infoMsg('Received message',event.data.op);
       switch(event.data.op){
           case 'play':
               video.play();
