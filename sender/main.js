@@ -32,7 +32,7 @@ pause.addEventListener('click', function(event){
 });
 
 let clear=document.querySelector('#clear');
-pause.addEventListener('click', function(event){
+clear.addEventListener('click', function(event){
   sendMessage({
     op:'clear'
   });
