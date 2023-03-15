@@ -9,7 +9,7 @@ window.onload = function() {
     });
   });
 
-  infoMsg('Receiver version 15');
+  infoMsg('Receiver version 16');
   infoMsg('UserAgent: '+window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
@@ -44,7 +44,7 @@ window.onload = function() {
 
   context.addCustomMessageListener('urn:x-cast:com.emabiz.chromecast-interactive', function(event) {
     castDebugLogger.info('ema',event);
-    infoMsg('Received message',event.data.op);
+    infoMsg('Received message '+event.data.op);
       switch(event.data.op){
           case 'play':
               send_iframe_message({
@@ -63,6 +63,7 @@ window.onload = function() {
   });
 
   function send_iframe_message(msg){
+    infoMsg('send_iframe_message: '+JSON.stringify(msg));
     iframe.contentWindow.postMessage(msg,"*");
   }
 
