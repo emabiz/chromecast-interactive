@@ -50,11 +50,16 @@ window.onload = function() {
   }
 
   let video=document.querySelector('#video');
-  video.play();
   let button=document.querySelector('#button');
 
   button.addEventListener('click', function(event){
     infoMsg('start play with audio');
     video.play();
   });
+
+  try{
+    video.play();
+  }catch(error){
+    infoMsg(error);
+  }
 };
