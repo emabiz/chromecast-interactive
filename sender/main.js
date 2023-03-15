@@ -25,7 +25,7 @@ play.addEventListener('click', function(event){
 });
 
 let pause=document.querySelector('#pause');
-play.addEventListener('click', function(event){
+pause.addEventListener('click', function(event){
   sendMessage({
     op:'pause'
   });
