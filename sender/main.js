@@ -50,7 +50,6 @@ kill.addEventListener('click', function(event){
 function onStopAppSuccess() {
   console.log('onStopAppSuccess');
 
-  kill.prop('disabled', true);
 }
 
 
@@ -77,10 +76,6 @@ function onError(message) {
 
 function onSuccess(message) {
   console.log('onSuccess: ' + JSON.stringify(message));
-
-  if (message.type == 'load') {
-      kill.prop('disabled', false);
-  }
 }
 
 
