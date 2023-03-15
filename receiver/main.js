@@ -3,7 +3,7 @@ window.onload = function() {
   let  errorElement = document.querySelector('#errorMsg');
   let iframe= document.querySelector('#content');
 
-  infoMsg('Receiver version 13');
+  infoMsg('Receiver version 14');
   infoMsg('UserAgent: '+window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
