@@ -17,3 +17,8 @@ body {
      rendering during transition on Chromecast. */
   z-index: 100;
 }
+
+#video{
+  width: 200px;
+  height: 100px;
+}

@@ -8,7 +8,7 @@ window.onload = function() {
   //   video.play();
   // });
 
-  infoMsg('Application version 9');
+  infoMsg('Application version 10');
   infoMsg('UserAgent: '+window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
