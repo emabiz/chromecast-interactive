@@ -9,7 +9,7 @@ window.onload = function() {
 
   castReceiverManager.onReady = function(event) {
     console.log('Received Ready event: ' + JSON.stringify(event.data));
-    window.castReceiverManager.setApplicationState('chromecast-dashboard is ready...');
+    window.castReceiverManager.setApplicationState('chromecast is ready...');
   };
 
   castReceiverManager.onSenderConnected = function(event) {
@@ -20,38 +20,34 @@ window.onload = function() {
     console.log('Received Sender Disconnected event: ' + event.senderId);
   };
 
-  window.messageBus =
-    window.castReceiverManager.getCastMessageBus(
-        'urn:x-cast:com.emabiz.chromecast-dashboard', cast.receiver.CastMessageBus.MessageType.JSON);
+  window.messageBus =window.castReceiverManager.getCastMessageBus('urn:x-cast:com.emabiz.chromecast', cast.receiver.CastMessageBus.MessageType.JSON);
 
   window.messageBus.onMessage = function(event) {
     console.log('Message [' + event.senderId + ']: ' + event.data);
 
-    if (event.data['type'] == 'load') {
-      $('#dashboard').attr('src', event.data['url']);
-      if (event.data['refresh'] > 0) {
-        $('#dashboard').attr('data-refresh', event.data['refresh'] * 1000);
-        setTimeout(reloadDashboard, $('#dashboard').attr('data-refresh'));
-      }
-      else {
-        $('#dashboard').attr('data-refresh', 0);
-      }
-    }
+    // if (event.data['type'] == 'load') {
+    //   $('#dashboard').attr('src', event.data['url']);
+    //   if (event.data['refresh'] > 0) {
+    //     $('#dashboard').attr('data-refresh', event.data['refresh'] * 1000);
+    //     setTimeout(reloadDashboard, $('#dashboard').attr('data-refresh'));
+    //   }
+    //   else {
+    //     $('#dashboard').attr('data-refresh', 0);
+    //   }
+    // }
   }
 
   // Initialize the CastReceiverManager with an application status message.
   window.castReceiverManager.start({statusText: 'Application is starting'});
   console.log('Receiver Manager started');
 
-  function reloadDashboard() {
-    $('#dashboard').attr('src', $('#dashboard').attr('src'));
-    if ($('#dashboard').attr('data-refresh')) {
-      setTimeout(reloadDashboard, $('#dashboard').attr('data-refresh'));
-    }
+
+  function infoMsg(msg) {
+    const errorElement = document.querySelector('#errorMsg');
+    errorElement.innerHTML += `<p>${msg}</p>`;
   }
 
-  $('#dashboard').load(function() {
-    $('#loading').hide();
-    console.log('Loading animation hidden.');
+  document.querySelector('#button').addEventListener('click', function(event){
+    infoMsg('pippo');
   });
 };
