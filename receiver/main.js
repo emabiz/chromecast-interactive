@@ -8,8 +8,8 @@ window.onload = function() {
     video.play();
   });
 
-  infoMsg('Application version 6');
-  infoMsg('UserAgent: ',window.navigator.userAgent );
+  infoMsg('Application version 7');
+  infoMsg('UserAgent: '+window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
 
