@@ -6,12 +6,16 @@ window.onload = function() {
   const context = cast.framework.CastReceiverContext.getInstance();
 
   context.addEventListener(cast.framework.system.EventType.READY, () => {
-    castDebugLogger.info('ema','Received Ready event: ' + JSON.stringify(event.data));
-    context.setApplicationState('chromecast is ready...');
     if (!castDebugLogger.debugOverlayElement_) {
         // Enable debug logger and show a 'DEBUG MODE' overlay at top left corner.
         castDebugLogger.setEnabled(true);
+        // Show debug overlay
+      castDebugLogger.showDebugLogs(true);
+      // Clear log messages on debug overlay
+      castDebugLogger.clearDebugLogs();
     }
+    castDebugLogger.info('ema','Received Ready event: ' + JSON.stringify(event.data));
+    context.setApplicationState('chromecast is ready...');
   });
 
   castDebugLogger.info('ema','Starting Receiver Manager');
