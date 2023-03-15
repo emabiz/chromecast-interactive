@@ -1,6 +1,7 @@
 
 window.onload = function() {
   let  errorElement = document.querySelector('#errorMsg');
+  let iframe= document.querySelector('#content');
   // let video=document.querySelector('#video');
   // let button=document.querySelector('#button');
   // button.addEventListener('click', function(event){
@@ -8,7 +9,7 @@ window.onload = function() {
   //   video.play();
   // });
 
-  infoMsg('Application version 10');
+  infoMsg('Receiver version 12');
   infoMsg('UserAgent: '+window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
@@ -44,19 +45,28 @@ window.onload = function() {
   context.addCustomMessageListener('urn:x-cast:com.emabiz.chromecast-interactive', function(event) {
     castDebugLogger.info('ema',event);
     infoMsg('Received message',event.data.op);
-      // switch(event.data.op){
-      //     case 'play':
-      //         video.play();
-      //         break;
-      //     case 'pause':
-      //         video.pause();
-      //         break;
-      //     case 'clear':
-      //       errorElement.innerHTML='';
-      //       break;
-      // }
+      switch(event.data.op){
+          case 'play':
+              send_iframe_message({
+                op:event.data.op
+              });
+              //video.play();
+              break;
+          case 'pause':
+            send_iframe_message({
+              op:event.data.op
+            });
+              //video.pause();
+              break;
+          case 'clear':
+            errorElement.innerHTML='';
+            break;
+      }
   });
 
+  function send_iframe_message(msg){
+    iframe.contentWindow.postMessage(msg,"*");
+  }
 
   context.start({statusText: 'Application is starting'});
   castDebugLogger.info('ema','Receiver Manager started');
