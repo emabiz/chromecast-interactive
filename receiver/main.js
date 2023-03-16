@@ -9,7 +9,7 @@ window.onload = function() {
     });
   });
 
-  infoMsg('Receiver version 17');
+  infoMsg('Receiver version 18');
   infoMsg('UserAgent: '+window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
@@ -17,7 +17,7 @@ window.onload = function() {
   const context = cast.framework.CastReceiverContext.getInstance();
 
   context.addEventListener(cast.framework.system.EventType.READY, () => {
-    infoMsg('Ready');
+    infoMsg('Ready: '+(!!castDebugLogger.debugOverlayElement_).toString());
     if (!castDebugLogger.debugOverlayElement_) {
         // Enable debug logger and show a 'DEBUG MODE' overlay at top left corner.
         castDebugLogger.setEnabled(true);
