@@ -9,7 +9,7 @@ window.onload = function() {
     });
   });
 
-  infoMsg('Receiver version 18');
+  infoMsg('Receiver version 20');
   infoMsg('UserAgent: '+window.navigator.userAgent );
 
   const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
@@ -20,11 +20,12 @@ window.onload = function() {
     infoMsg('Ready: '+(!!castDebugLogger.debugOverlayElement_).toString());
     if (!castDebugLogger.debugOverlayElement_) {
         // Enable debug logger and show a 'DEBUG MODE' overlay at top left corner.
+        infoMsg('Enable castDebugLogger');
         castDebugLogger.setEnabled(true);
         // Show debug overlay
-      castDebugLogger.showDebugLogs(true);
-      // Clear log messages on debug overlay
-      castDebugLogger.clearDebugLogs();
+        castDebugLogger.showDebugLogs(true);
+        // Clear log messages on debug overlay
+        castDebugLogger.clearDebugLogs();
     }
     castDebugLogger.info('ema','Received Ready event: ' + JSON.stringify(event.data));
     context.setApplicationState('chromecast is ready...');
